@@ -1,0 +1,173 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>{{title}}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">DataTables</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tenants</h3>
+                        <a class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#modalTenant">
+                          <i class="fa fa-plus"></i>  Add
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div>
+                                <div class="col-sm-12 col-md-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Shop Name</th>
+                                                <th>Shop Owner Name</th>
+                                                <th>Contact No.</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let row of tenantList ;let i = index;">
+                                                <td>{{i+1}}</td>
+                                                <td>{{row.shop_name}}</td>
+                                                <td>{{row.shop_owner_name}}</td>
+                                                <td>{{row.contact_number}}</td>
+                                                <td>{{row.email}}</td>
+                                                <td>{{row.address}}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-info " data-toggle="modal" data-target="#modalTenantEdit"><i class="fa fa-edit"></i></button>
+                                                    <button class="btn btn-sm btn-danger "><i class="fa fa-trash"></i></button>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modalTenant" style="display: none;" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Default Modal</h4>
+                    <button #closebutton type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Shop Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="newTenant.shop_name" placeholder="Enter Shop Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Shop Owner Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="newTenant.shop_owner_name" placeholder="Enter Shop Owner Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact No.</label>
+                        <input type="text" class="form-control" [(ngModel)]="newTenant.contact_number" placeholder="Enter Shop Owner Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" [(ngModel)]="newTenant.email" placeholder="Enter email">
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address</label>
+                        <textarea class="form-control" [(ngModel)]="newTenant.address" placeholder="Enter Address"></textarea>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button"(click)="save()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+
+    <div class="modal fade" id="modalTenantEdit" style="display: none;" aria-modal="true" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Modal</h4>
+                    <button #closebutton type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Shop Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="newTenant.shop_name"
+                                placeholder="Enter Shop Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Shop Owner Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="newTenant.shop_owner_name"
+                                placeholder="Enter Shop Owner Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Contact No.</label>
+                            <input type="text" class="form-control" [(ngModel)]="newTenant.contact_number"
+                                placeholder="Enter Shop Owner Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" [(ngModel)]="newTenant.email"
+                                placeholder="Enter email">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Address</label>
+                            <textarea class="form-control" [(ngModel)]="newTenant.address"
+                                placeholder="Enter Address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" (click)="save()" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+</section>
+
+
